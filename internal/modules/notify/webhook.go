@@ -39,6 +39,7 @@ func (webHook *WebHook) send(msg Message, url string) {
 	for i < maxTimes {
 		resp := httpclient.PostJson(url, content, timeout)
 		if resp.StatusCode == 200 {
+			logger.Debugf("WebHook response body: %v", resp.Body)
 			break
 		}
 		i += 1

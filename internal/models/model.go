@@ -5,12 +5,13 @@ import (
 	"strings"
 	"time"
 
-	macaron "gopkg.in/macaron.v1"
+	"gopkg.in/macaron.v1"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/core"
 	"github.com/go-xorm/xorm"
 	_ "github.com/lib/pq"
+
 	"github.com/ouqiang/gocron/internal/modules/app"
 	"github.com/ouqiang/gocron/internal/modules/logger"
 	"github.com/ouqiang/gocron/internal/modules/setting"
@@ -70,7 +71,7 @@ func (model *BaseModel) pageLimitOffset() int {
 	return (model.Page - 1) * model.PageSize
 }
 
-// 创建Db
+// CreateDb 创建Db
 func CreateDb() *xorm.Engine {
 	dsn := getDbEngineDSN(app.Setting)
 	engine, err := xorm.NewEngine(app.Setting.Db.Engine, dsn)

@@ -36,7 +36,7 @@ func (user *User) Create() (insertId int, err error) {
 	return
 }
 
-// 更新
+// Update 更新
 func (user *User) Update(id int, data CommonMap) (int64, error) {
 	return Db.Table(user).ID(id).Update(data)
 }
@@ -48,22 +48,22 @@ func (user *User) UpdatePassword(id int, password string) (int64, error) {
 	return user.Update(id, CommonMap{"password": safePassword, "salt": salt})
 }
 
-// 删除
+// Delete 删除
 func (user *User) Delete(id int) (int64, error) {
 	return Db.Id(id).Delete(user)
 }
 
-// 禁用
+// Disable 禁用
 func (user *User) Disable(id int) (int64, error) {
 	return user.Update(id, CommonMap{"status": Disabled})
 }
 
-// 激活
+// Enable 激活
 func (user *User) Enable(id int) (int64, error) {
 	return user.Update(id, CommonMap{"status": Enabled})
 }
 
-// 验证用户名和密码
+// Match 验证用户名和密码
 func (user *User) Match(username, password string) bool {
 	where := "(name = ? OR email = ?) AND status =? "
 	_, err := Db.Where(where, username, username, Enabled).Get(user)
@@ -75,14 +75,14 @@ func (user *User) Match(username, password string) bool {
 	return hashPassword == user.Password
 }
 
-// 获取用户详情
+// Find 获取用户详情
 func (user *User) Find(id int) error {
 	_, err := Db.Id(id).Get(user)
 
 	return err
 }
 
-// 用户名是否存在
+// UsernameExists 用户名是否存在
 func (user *User) UsernameExists(username string, uid int) (int64, error) {
 	if uid > 0 {
 		return Db.Where("name = ? AND id != ?", username, uid).Count(user)
@@ -91,7 +91,7 @@ func (user *User) UsernameExists(username string, uid int) (int64, error) {
 	return Db.Where("name = ?", username).Count(user)
 }
 
-// 邮箱地址是否存在
+// EmailExists 邮箱地址是否存在
 func (user *User) EmailExists(email string, uid int) (int64, error) {
 	if uid > 0 {
 		return Db.Where("email = ? AND id != ?", email, uid).Count(user)

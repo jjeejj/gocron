@@ -1,18 +1,16 @@
 package app
 
 import (
-	"os"
-	"path/filepath"
-
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/ouqiang/gocron/internal/modules/logger"
 	"github.com/ouqiang/gocron/internal/modules/setting"
 	"github.com/ouqiang/gocron/internal/modules/utils"
-	"github.com/ouqiang/goutil"
 )
 
 var (
@@ -38,7 +36,9 @@ var (
 func InitEnv(versionString string) {
 	logger.InitLogger()
 	var err error
-	AppDir, err = goutil.WorkDir()
+	// AppDir, err = goutil.WorkDir()
+	AppDir, err = os.Getwd()
+	logger.Info("----------", AppDir)
 	if err != nil {
 		logger.Fatal(err)
 	}

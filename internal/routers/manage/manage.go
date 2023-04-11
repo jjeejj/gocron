@@ -3,10 +3,11 @@ package manage
 import (
 	"encoding/json"
 
+	"gopkg.in/macaron.v1"
+
 	"github.com/ouqiang/gocron/internal/models"
 	"github.com/ouqiang/gocron/internal/modules/logger"
 	"github.com/ouqiang/gocron/internal/modules/utils"
-	"gopkg.in/macaron.v1"
 )
 
 func Slack(ctx *macaron.Context) string {
@@ -54,7 +55,7 @@ func RemoveSlackChannel(ctx *macaron.Context) string {
 
 // endregion
 
-// region 邮件
+// Mail 邮件
 func Mail(ctx *macaron.Context) string {
 	settingModel := new(models.Setting)
 	mail, err := settingModel.Mail()

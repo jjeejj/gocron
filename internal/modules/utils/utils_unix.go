@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package utils
@@ -15,7 +16,7 @@ type Result struct {
 	err    error
 }
 
-// 执行shell命令，可设置执行超时时间
+// ExecShell 执行shell命令，可设置执行超时时间
 func ExecShell(ctx context.Context, command string) (string, error) {
 	cmd := exec.Command("/bin/bash", "-c", command)
 	cmd.SysProcAttr = &syscall.SysProcAttr{

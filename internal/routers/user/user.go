@@ -6,12 +6,13 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"gopkg.in/macaron.v1"
+
 	"github.com/ouqiang/gocron/internal/models"
 	"github.com/ouqiang/gocron/internal/modules/app"
 	"github.com/ouqiang/gocron/internal/modules/logger"
 	"github.com/ouqiang/gocron/internal/modules/utils"
 	"github.com/ouqiang/gocron/internal/routers/base"
-	"gopkg.in/macaron.v1"
 )
 
 const tokenDuration = 4 * time.Hour
@@ -133,7 +134,7 @@ func Store(ctx *macaron.Context, form UserForm) string {
 	return json.Success("保存成功", nil)
 }
 
-// 删除用户
+// Remove 删除用户
 func Remove(ctx *macaron.Context) string {
 	id := ctx.ParamsInt(":id")
 	json := utils.JsonResponse{}
@@ -147,17 +148,17 @@ func Remove(ctx *macaron.Context) string {
 	return json.Success(utils.SuccessContent, nil)
 }
 
-// 激活用户
+// Enable 激活用户
 func Enable(ctx *macaron.Context) string {
 	return changeStatus(ctx, models.Enabled)
 }
 
-// 禁用用户
+// Disable 禁用用户
 func Disable(ctx *macaron.Context) string {
 	return changeStatus(ctx, models.Disabled)
 }
 
-// 改变任务状态
+// changeStatus 改变任务状态
 func changeStatus(ctx *macaron.Context, status models.Status) string {
 	id := ctx.ParamsInt(":id")
 	json := utils.JsonResponse{}

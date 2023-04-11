@@ -66,7 +66,7 @@
         <el-row v-if="form.level === 1">
           <el-col :span="12">
             <el-form-item label="crontab表达式" prop="spec">
-              <el-input v-model.trim="form.spec"
+              <el-input v-model="form.spec"
                         placeholder="秒 分 时 天 月 周"></el-input>
             </el-form-item>
           </el-col>

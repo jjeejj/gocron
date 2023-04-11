@@ -7,10 +7,10 @@ import (
 // 用户登录日志
 
 type LoginLog struct {
-	Id        int       `json:"id" xorm:"pk autoincr notnull "`
-	Username  string    `json:"username" xorm:"varchar(32) notnull"`
+	Id        int       `json:"id" xorm:"pk autoincr not null "`
+	Username  string    `json:"username" xorm:"varchar(32) not null"`
 	Ip        string    `json:"ip" xorm:"varchar(15) not null"`
-	Created   time.Time `json:"created" xorm:"datetime notnull created"`
+	Created   time.Time `json:"created" xorm:"datetime not null created"`
 	BaseModel `json:"-" xorm:"-"`
 }
 
